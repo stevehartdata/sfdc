@@ -1,0 +1,91 @@
+name:                sfdc
+version:             0.1.0.0
+author:              "Stephen Hart"
+maintainer:          "steve@stevehart.net"
+copyright:           "2020 Stephen Hart"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description: Interact with the Salesforce.com (SFDC) APIs
+
+dependencies:
+- base >= 4.7 && < 5
+- http-client
+- http-client-tls
+- mtl
+- servant-client
+- time
+- utf8-string
+
+library:
+  source-dirs: src
+  dependencies:
+    - aeson
+    - asn1-encoding
+    - asn1-types
+    - async
+    - bytestring
+    - bytestring-tree-builder
+    - casing
+    - cassava
+    - containers
+    - cryptonite
+    - exceptions
+    - extra
+    - filepath
+    - generic-deriving
+    - hourglass
+    - http-api-data
+    - http-media
+    - http-types
+    - jose
+    - lens
+    - mtl
+    - persistent-template
+    - retry
+    - servant
+    - servant-auth
+    - servant-auth-client
+    - servant-cassava
+    - servant-client
+    - servant-client-core
+    - template-haskell
+    - text
+    - text-short
+    - time
+    - vector
+    - x509
+
+executables: {}
+
+tests:
+  sfdc-test:
+    main:                Main.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - sfdc
+    - bytestring
+    - cassava
+    - cryptonite
+    - directory
+    - hspec
+    - hspec-expectations
+    - servant
+    - text
+    - x509
+    - x509-store
+    - yaml
+    - MissingH

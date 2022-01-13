@@ -1,0 +1,37 @@
+<h1>Backup Job Details
+
+<a href=@{EditBackupJobR job_id}>Edit
+
+<dl>
+    <dt>Backup Job Name
+    <dd>#{backupJobName job}
+
+    <dt>Backup Mode
+    <dd>#{show $ backupJobObjectsToBackupSetting job}
+
+    $if backupJobObjectsToBackupSetting job == SpecifiedObjects
+        <dt>Objects to Backup
+        <dd>
+            $if null $ backupJobSelectedObjects job
+                None
+            $else
+                <ul>
+                    $forall obj_nm <- backupJobSelectedObjects job
+                        <li>#{SObjectName.toText $ obj_nm}
+
+<h2>Job Instances
+
+<ul>
+    $forall Entity qbj_id qbj <- queued_jobs
+        <li><a href=@{QueuedBackupJobR job_id qbj_id}>Job #{show qbj_id}</a> 
+            $maybe end_time <- queuedBackupJobEndedAt qbj
+                $maybe err <- queuedBackupJobError qbj
+                    failed at #{iso8601Show end_time}
+                $nothing
+                    completed successfully at #{iso8601Show end_time}
+            $nothing
+                $maybe start_time <- queuedBackupJobStartedAt qbj
+                    started at #{iso8601Show start_time}
+                $nothing
+                    entered the queue at #{iso8601Show $ queuedBackupJobQueuedAt qbj}
+            .

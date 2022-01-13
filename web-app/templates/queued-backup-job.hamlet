@@ -1,0 +1,43 @@
+<h1>Queued Backup Job Details
+
+<dl>
+    <dt>Queued Backup Job ID
+    <dd>#{show qbj_id}
+
+    <dt>Entered queue at
+    <dd>#{iso8601Show $ queuedBackupJobQueuedAt qbj}
+
+    <dt>Started at
+    <dd>
+        $maybe start_time <- queuedBackupJobStartedAt qbj
+            #{iso8601Show start_time}
+        $nothing
+            Not yet started
+
+    $maybe err <- queuedBackupJobError qbj
+        <dt>Failed at
+        <dd>
+            $maybe end_time <- queuedBackupJobEndedAt qbj
+                #{iso8601Show end_time}
+            $nothing 
+                The job has an error but has not yet completed.
+    $nothing
+        <dt>Completed at
+        <dd>
+            $maybe end_time <- queuedBackupJobEndedAt qbj
+                #{iso8601Show end_time}
+            $nothing
+                Not yet completed
+
+$if queuedBackupJobCompletedSuccessfully qbj
+    <h2>Backup Results
+
+    $if null backup_files
+        <p>No backup results are available.
+    $else
+        <ul>
+        $forall (sobj_nm, f_locs) <- backup_files
+            <li>#{SObjectName.toText sobj_nm}
+                <ul>
+                    $forall f_loc <- f_locs
+                        <li><a href=@{DownloadBackupFileR bj_id qbj_id f_loc}>File #{T.pack $ printf "%d" $ BackupFileLocator.fileNumber f_loc}</a>

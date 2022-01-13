@@ -1,0 +1,15 @@
+-- By default this file is used by `parseRoutesFile` in Foundation.hs
+-- Syntax for this file here: https://www.yesodweb.com/book/routing-and-handlers
+
+/static StaticR Static appStatic
+/auth   AuthR   Auth   getAuth
+
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+/backup/jobs BackupJobsR GET
+/backup/jobs/new NewBackupJobR GET POST
+/backup/job/#BackupJobId BackupJobR GET
+/backup/job/#BackupJobId/edit EditBackupJobR GET POST
+/backup/job/#BackupJobId/instance/#QueuedBackupJobId QueuedBackupJobR GET
+/backup/job/#BackupJobId/instance/#QueuedBackupJobId/file/#BackupFileLocator DownloadBackupFileR GET

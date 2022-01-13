@@ -1,0 +1,8 @@
+<form method=post enctype=#{formEnctype}>
+    ^{formWidget}
+
+    <button type="submit" formnovalidate name="action" value="refresh_objects">
+        Refresh Objects
+
+    <button .btn.btn-primary type="submit">
+        Submit

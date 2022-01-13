@@ -1,0 +1,66 @@
+-- By default this file is used by `persistFileWith` in Model.hs (which is imported by Foundation.hs)
+-- Syntax for this file here: https://github.com/yesodweb/persistent/blob/master/docs/Persistent-entity-syntax.md
+
+User
+    sfdcUserId Text
+    sfdcPreferredUsername Text
+    sfdcEmail Text
+    UniqueUser sfdcUserId
+    deriving Typeable
+    deriving Eq
+    deriving Show
+UserAccessibleObjects
+    userId UserId
+    objects [SObjectName]
+    UniqueUserAccessibleObjects userId
+    deriving Show
+BackupJob
+    name Text
+    userId UserId
+    objectsToBackupSetting ObjectsToBackupSetting
+    selectedObjects [SObjectName]
+    scheduledMonday Bool
+    scheduledTuesday Bool
+    scheduledWednesday Bool
+    scheduledThursday Bool
+    scheduledFriday Bool
+    scheduledSaturday Bool
+    scheduled0 Bool
+    scheduled1 Bool
+    scheduled2 Bool
+    scheduled3 Bool
+    scheduled4 Bool
+    scheduled5 Bool
+    scheduled6 Bool
+    scheduled7 Bool
+    scheduled8 Bool
+    scheduled9 Bool
+    scheduled10 Bool
+    scheduled11 Bool
+    scheduled12 Bool
+    scheduled13 Bool
+    scheduled14 Bool
+    scheduled15 Bool
+    scheduled16 Bool
+    scheduled17 Bool
+    scheduled18 Bool
+    scheduled19 Bool
+    scheduled20 Bool
+    scheduled21 Bool
+    scheduled22 Bool
+    scheduled23 Bool
+    deriving Eq
+    deriving Show
+QueuedBackupJob
+    Id Int
+    userId UserId
+    sfdcUsername Text
+    backupJob BackupJobId Maybe
+    objectsToBackup ObjectsToBackup
+    queuedAt UTCTime
+    startedAt UTCTime Maybe
+    endedAt UTCTime Maybe
+    error Text Maybe
+    warning Text Maybe
+    deriving Eq
+    deriving Show

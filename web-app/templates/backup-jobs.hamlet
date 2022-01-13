@@ -1,0 +1,8 @@
+<div .d-flex.justify-content-between.align-items-center>
+    <h1>Backup Jobs
+    <a .btn.btn-sm.btn-outline-secondary href=@{NewBackupJobR}>New
+
+<ul>
+    $forall Entity jobid job <- jobs
+      <li>
+        <a href=@{BackupJobR jobid}>#{backupJobName job}

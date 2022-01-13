@@ -1,0 +1,43 @@
+
+<!-- Static navbar -->
+<nav .navbar.navbar-dark.navbar-expand-lg>
+    <div .container>
+        <button .navbar-toggler type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+
+        <div #navbar .collapse.navbar-collapse>
+            <ul .navbar-nav.mr-auto>
+                $forall MenuItem label route _ <- navbarLeftFilteredMenuItems
+                    <li .nav-item :Just route == mcurrentRoute:.active>
+                        <a href="@{route}" .nav-link>#{label}
+
+            <ul .navbar-nav>
+                $forall MenuItem label route _ <- navbarRightFilteredMenuItems
+                    <li .nav-item :Just route == mcurrentRoute:.active>
+                        <a href="@{route}" .nav-link>#{label}
+
+<!-- Page Contents -->
+
+<div .container>
+    <nav aria-label="breadcrumb">
+        <ol .breadcrumb>
+            $forall bc <- parents
+                <li .breadcrumb-item>
+                    <a href="@{fst bc}">#{snd bc}
+
+            <li .breadcrumb-item.active aria-current="page">#{title}
+
+    $maybe msg <- mmsg
+      <div .alert.alert-info #message>#{msg}
+
+
+<div .container>
+    <div .row>
+        <div .col-md-12>
+            ^{widget}
+
+<!-- Footer -->
+<footer .footer>
+    <div .container>
+        <p .text-muted>
+            #{appCopyright $ appSettings master}
